@@ -2,21 +2,16 @@ import React from "react";
 import Header from "./components/Header";
 
 function App() {
+  const projects = ["Desenvolvimento de app", "Front-end web"];
+
   return (
     <>
-      <Header title="Homepage">
-        <ul>
-          <li>Homepage</li>
-          <li>Project</li>
-        </ul>
-      </Header>
-      <Header title="Projects">
-        <ul>
-          <li>Homepage</li>
-          <li>Project</li>
-          <li>Login</li>
-        </ul>
-      </Header>
+      <Header title="Projects" />
+      <ul>
+        {projects.map((project) => (
+          <li key={project}>{project}</li>
+        ))}
+      </ul>
     </>
   );
 }
