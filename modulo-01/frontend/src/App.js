@@ -12,9 +12,16 @@ function App() {
     });
   }, []);
 
-  function handleAddProject() {
-    setProjects([...projects, `Novo Projeto ${Date.now()}`]);
+  async function handleAddProject() {
+    const response = await api.post("/projects", {
+      title: `Novo Projeto ${Date.now()}`,
+      owner: "Diogo R Dias",
+    });
+
+    const project = response.data;
+    setProjects([...projects, project]);
   }
+
   return (
     <>
       <Header title="Projects" />
