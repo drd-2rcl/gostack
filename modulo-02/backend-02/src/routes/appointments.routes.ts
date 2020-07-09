@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
-import AppointmentsController from '../controllers/AppointmentsController';
+import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
-const appointmentsController = new AppointmentsController();
+const appointmentsRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', (request, response) => {
-  const appointments = appointmentsController.all();
+  const appointments = appointmentsRepository.all();
 
   return response.json(appointments);
 });
@@ -20,7 +20,7 @@ appointmentsRouter.post('/', (request, response) => {
     const parsedDate = parseISO(date);
 
     const createAppointment = new CreateAppointmentService(
-      appointmentsController,
+      appointmentsRepository,
     );
 
     const appointment = createAppointment.run({ date: parsedDate, provider });
